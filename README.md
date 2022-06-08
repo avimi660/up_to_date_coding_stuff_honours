@@ -1,3 +1,4 @@
+`
 ## up_to_date_coding_stuff_honours
 
 
@@ -7,7 +8,6 @@
 no_mito_genes=`wc -l mito_genes.txt | awk '{ print $1 }'`
 
 for mito_line in `seq 2 1 $no_mito_genes`;
-# For loop to do stuff...
       do gene_search_term=`head -n $mito_line mito_genes.txt | tail -n 1 | cut -f 4`;
       grep "ID=gene-"$gene_search_term";" /nesi/nobackup/uoo03398/michael/possum_genome_master/GCF_011100635.1_mTriVul1.pri_genomic.gff | grep $'\t'gene$'\t' > temp;
       alt_search_terms=`head -n $mito_line mito_genes.txt | tail -n 1 | cut -f 5`;
