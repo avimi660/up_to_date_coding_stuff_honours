@@ -1,4 +1,4 @@
-`
+```
 ## up_to_date_coding_stuff_honours
 
 
@@ -68,6 +68,35 @@ write_delim(zero_gene_matches, "zero_gene_matches.txt", delim=" ",col_names=FALS
  
 
 q()
+
+# making blast databases - downloaded fna **1st april**
+ # Building towards pulling out the coordinates of this gene, so we can extract the DNA and then search for it in the possum genome
+
+grep "ID=gene-"$gene_search_term";" GCF_000001405.39_GRCh38.p13_genomic.gff | grep $'\t'gene$'\t > temp.gff
+
+## We will grab most recent version of bedtools
+
+module load BEDTools/2.29.2-GCC-9.2.0
+
+## We can extract that bit of the human genome using bedtools
+
+bedtools getfasta -fi GCF_000001405.39_GRCh38.p13_genomic.fna -bed temp.gff > temp_human.fna
+
+module load BLAST/2.12.0-GCC-9.2.0
+
+makeblastdb GCF_011100635.1_mTriVul1.pri_genomic.fna.gz
+
+blastn -db GCF_011100635.1_mTriVul1.pri_genomic.fna -query temp_human.fna 
+
+ 
+
+## To get it more nicely formatted:
+
+blastn -db GCF_011100635.1_mTriVul1.pri_genomic.fna -query temp_human.fna -outfmt 6 > temp
+
+ cat temp | sort -g -k 11 | head -n 1 > temp_possum_match
+
+
 
 ## next I ran this code following which incorporates two scripts (zero_match_gene_finds.sh and blast_match.R)
 ## when sending the job away through slurm I sent away the zero_match_gene_finds.sh slurm which within the script runs the blast_match.R code
