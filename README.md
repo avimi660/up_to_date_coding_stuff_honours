@@ -37,7 +37,6 @@ done
 
 module load R/4.1.0-gimkl-2020a
 
- 
 
 Type R to load R:
 
@@ -84,17 +83,11 @@ bedtools getfasta -fi GCF_000001405.39_GRCh38.p13_genomic.fna -bed temp.gff > te
 
 module load BLAST/2.12.0-GCC-9.2.0
 
-makeblastdb GCF_011100635.1_mTriVul1.pri_genomic.fna.gz
+makeblastdb -in GCF_011100635.1_mTriVul1.pri_genomic.fna -dbtype nucl
 
-blastn -db GCF_011100635.1_mTriVul1.pri_genomic.fna -query temp_human.fna 
+## do for humans too
 
- 
-
-## To get it more nicely formatted:
-
-blastn -db GCF_011100635.1_mTriVul1.pri_genomic.fna -query temp_human.fna -outfmt 6 > temp
-
- cat temp | sort -g -k 11 | head -n 1 > temp_possum_match
+makeblastdb -in GCF_000001405.39_GRCh38.p13_genomic.fna -dbtype nucl
 
 
 
