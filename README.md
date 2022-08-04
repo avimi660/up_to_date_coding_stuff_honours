@@ -14,7 +14,7 @@ for mito_line in `seq 2 1 $no_mito_genes`;
       no_alts=`echo $alt_search_terms | grep -o ";" | wc -l`;
                 for alt_gene in `seq 1 1 $no_alts`;
                         do alt_gene_name=`echo $alt_search_terms | cut -d ";" -f $alt_gene | sed 's/ //g'`;
-                        grep "ID=gene-"$alt_gene_name";" /nesi/nobackup/uoo03398/amichael/possum_genome_master/GCF_011100635.1_mTriVul1.pri_genomic.gff | grep $'\t'gene$'\t' >> temp;
+                        grep "ID=gene-"$alt_gene_name";" /nesi/nobackup/uoo03398/michael/possum_genome_master/GCF_011100635.1_mTriVul1.pri_genomic.gff | grep $'\t'gene$'\t' >> temp;
                 done;
         cat temp | sort | uniq > temp_all_searches;
         if [ `wc -l temp_all_searches | awk '{ print $1 }'` -lt 1 ]
@@ -179,7 +179,7 @@ while (not_found_match) {
       } else {
       # If there isn't a clear match, look at the total sum base pair of matches      
       temp_sum <- sum_matches %>% ungroup() %>% select(which(no_exons==max(no_exons))+1) %>% colSums(na.rm=TRUE)
-            # If there is a clear match based on the sum of matchs
+            # If there is a clear match based on the sum of matches
             if(sum(temp_sum==max(temp_sum))==1) {
                   # Grab the "winner's" name 
                   chrom_name <- names(which(temp_sum==max(temp_sum)))
