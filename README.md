@@ -167,7 +167,7 @@ while (not_found_match) {
       # Initializing the no_exons variable
       no_exons <- NULL
 
-      # For the number of columns (i.e. possum chromosomes in sm_matches)
+      # For the number of columns (i.e. possum chromosomes in sum_matches)
       for (x in 2:dim(sum_matches)[2]) {
             # Counting the number of exons that the chromosome has a match to
             no_exons <- c(no_exons,sum(!is.na(sum_matches[,x])))
