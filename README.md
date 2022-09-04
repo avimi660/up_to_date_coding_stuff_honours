@@ -36,35 +36,15 @@ done
 ## after the bash script we ran this following code to create some tables for the blast search code
 
 module load R/4.1.0-gimkl-2020a
-
-
-Type R to load R:
-
- 
-
+## Type R to load R:
 library(tidyverse)
 
- 
-
 results_table_tidyverse <- read_delim("results_matches.txt",delim=" ",col_names=FALSE)
-
- 
-
-multiple_gene_matches <- results_table_tidyverse %>% filter(X2>1)
-
- 
-
-zero_gene_matches <- results_table_tidyverse %>% filter(X2==0)
-
- 
+	multiple_gene_matches <- results_table_tidyverse %>% filter(X2>1)
+		zero_gene_matches <- results_table_tidyverse %>% filter(X2==0)
 
 write_delim(multiple_gene_matches, "multiple_gene_matches.txt", delim=" ",col_names=FALSE)
-
- 
-
 write_delim(zero_gene_matches, "zero_gene_matches.txt", delim=" ",col_names=FALSE)
-
- 
 
 q()
 
